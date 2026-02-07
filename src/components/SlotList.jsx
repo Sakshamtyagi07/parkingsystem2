@@ -1,7 +1,10 @@
+import ParkingGrid from './ParkingGrid'
+
 export default function SlotList({ slots }) {
   if (slots.length === 0) {
     return (
       <div className="empty-state">
+        <div className="empty-icon">🅿️</div>
         <p>No parking slots added yet. Add a slot to get started!</p>
       </div>
     )
@@ -9,6 +12,7 @@ export default function SlotList({ slots }) {
 
   return (
     <div className="slot-list">
+      <ParkingGrid slots={slots} />
       <table className="slots-table">
         <thead>
           <tr>

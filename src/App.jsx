@@ -3,6 +3,8 @@ import AddSlot from './components/AddSlot'
 import SlotList from './components/SlotList'
 import ParkVehicle from './components/ParkVehicle'
 import OutputPanel from './components/OutputPanel'
+import StatsDisplay from './components/StatsDisplay'
+import ParkingMap from './components/ParkingMap'
 
 export default function App() {
   const [slots, setSlots] = useState([])
@@ -107,21 +109,31 @@ export default function App() {
     <div className="app-container">
       <header className="app-header">
         <h1>🅿️ Smart Parking Lot System</h1>
+        <p className="header-subtitle">Real-time parking management solution</p>
       </header>
 
       <main className="app-main">
-        <section className="section">
-          <h2>Add New Parking Slot</h2>
+        <section className="section left-section">
+          <h2>📍 Add New Parking Slot</h2>
           <AddSlot onAddSlot={handleAddSlot} />
         </section>
 
-        <section className="section">
+        <section className="section right-section">
+          <h2>📊 Parking Lot Status</h2>
+          <StatsDisplay slots={slots} />
+        </section>
+
+        <section className="section full-width map-section">
+          <ParkingMap slots={slots} />
+        </section>
+
+        <section className="section left-section">
           <h2>Available Parking Slots</h2>
           <SlotList slots={slots} />
         </section>
 
-        <section className="section">
-          <h2>Park or Remove Vehicle</h2>
+        <section className="section right-section">
+          <h2>🚗 Park or Remove Vehicle</h2>
           <div className="action-grid">
             <ParkVehicle onParkVehicle={handleParkVehicle} />
             <ParkVehicle isRemove onRemoveVehicle={handleRemoveVehicle} />
