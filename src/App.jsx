@@ -5,11 +5,14 @@ import ParkVehicle from './components/ParkVehicle'
 import OutputPanel from './components/OutputPanel'
 import StatsDisplay from './components/StatsDisplay'
 import ParkingMap from './components/ParkingMap'
+import ComplaintForm from './components/ComplaintForm'
+import ComplaintList from './components/ComplaintList'
 
 export default function App() {
   const [slots, setSlots] = useState([])
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState('') // 'success' or 'error'
+  const [complaints, setComplaints] = useState([])
 
   /**
    * Adds a new parking slot with validation
@@ -105,6 +108,14 @@ export default function App() {
     setMessageType('success')
   }
 
+  /**
+   * Handles complaint submission
+   * Stores complaint with details and proof image
+   */
+  const handleSubmitComplaint = (complaint) => {
+    setComplaints([complaint, ...complaints])
+  }
+
   return (
     <div className="app-container">
       <header className="app-header">
@@ -142,6 +153,16 @@ export default function App() {
 
         <section className="section">
           <OutputPanel message={message} messageType={messageType} />
+        </section>
+
+        <section className="section full-width">
+          <h2>📝 File a Complaint</h2>
+          <ComplaintForm onSubmitComplaint={handleSubmitComplaint} />
+        </section>
+
+        <section className="section full-width">
+          <h2>📋 Filed Complaints ({complaints.length})</h2>
+          <ComplaintList complaints={complaints} />
         </section>
       </main>
     </div>
